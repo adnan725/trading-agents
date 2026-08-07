@@ -9,6 +9,7 @@ load_dotenv(override=True)
 massive_api_key = os.getenv("MASSIVE_API_KEY")
 tavily_api_key = os.getenv("TAVILY_API_KEY")
 
+PROJECT_DIR = str(Path(__file__).resolve().parent.parent)
 TIMEOUT = 120
 
 if not massive_api_key:
@@ -32,7 +33,13 @@ market_params = {
 
 def trader_mcp_servers() -> list[MCPServerStdio]:
     """The trader mcp."""
-    return [MCPServerStdio(market_params, client_session_timeout_seconds=TIMEOUT)]
+
+    params = [
+        {"command": "uv", "args": ["run", "-m", "backend.accounts_server"], "cwd": PROJECT_DIR},
+        market_params,
+    ]
+
+    return [MCPServerStdio(p, client_session_timeout_seconds=TIMEOUT) for p in params]
 
 def researcher_mcp_servers() -> list[MCPServerStdio]:
     """The researcher's MCP servers: Fetch and Tavily web search.

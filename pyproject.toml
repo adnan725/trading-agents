@@ -9,4 +9,5 @@ dependencies = [
     "mcp<2",
     "python-dotenv>=1.2.2",
     "mcp-server-fetch>=2026.7.10",
+    "massive>=2.8.0",
 ]
