@@ -1,0 +1,12 @@
+[project]
+name = "trading-agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "openai-agents>=0.19.4",
+    "mcp<2",
+    "python-dotenv>=1.2.2",
+    "mcp-server-fetch>=2026.7.10",
+]
